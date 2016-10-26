@@ -31,12 +31,24 @@ class App extends Component {
 
 let mapStateToProps = state => ({number: state})
 
-let mapDispatchToProps = dispatch => ({
-  increase: () => dispatch({type: 'INCREASE'}),
-  decrease: () => dispatch({type: 'DECREASE'})
-})
+// let mapDispatchToProps = dispatch => ({
+//   increase: () => dispatch({type: 'INCREASE'}),
+//   decrease: () => dispatch({type: 'DECREASE'})
+// })
 
-const SmartApp = connect(mapStateToProps, mapDispatchToProps)(App)
+function increase() {
+  return {
+    type:  'INCREASE'
+  }
+}
+function decrease() {
+  return {
+    type:  'DECREASE'
+  }
+}
+
+
+const SmartApp = connect(mapStateToProps, {increase, decrease})(App)
 
 ReactDOM.render(
   <Provider store={store}>
