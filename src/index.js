@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import {createStore} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
+import createLogger from 'redux-logger'
 import {connect, Provider} from 'react-redux'
 
-let reducer = (state = 0, action) => {
+const logger = createLogger()
+
+const reducer = (state = 0, action) => {
   switch (action.type) {
     case 'INCREASE':
       return state + 1
@@ -14,7 +17,7 @@ let reducer = (state = 0, action) => {
   }
 }
 
-let store = createStore(reducer)
+const store = createStore(reducer,  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(logger))
 
 class App extends Component {
   render() {
